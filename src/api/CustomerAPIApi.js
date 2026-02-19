@@ -35,6 +35,13 @@ export default class CustomerAPIApi {
     }
 
 
+    /**
+     * Callback function to receive the result of the getCustomerListing operation.
+     * @callback module:api/CustomerAPIApi~getCustomerListingCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CustomerListingResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
 
     /**
      * Customer Listing
@@ -44,9 +51,10 @@ export default class CustomerAPIApi {
      * @param {String} [cursor] Pagination cursor from `next_page` in a previous response
      * @param {Number} [pageSize = 200)] Number of results per page (1-200, default 200)
      * @param {Boolean} [qualityFilter = true)] Filter out low-quality results (junk TLDs and unreachable websites)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CustomerListingResponse} and HTTP response
+     * @param {module:api/CustomerAPIApi~getCustomerListingCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CustomerListingResponse}
      */
-    getCustomerListingWithHttpInfo(website, opts) {
+    getCustomerListing(website, opts, callback) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'website' is set
@@ -74,25 +82,8 @@ export default class CustomerAPIApi {
       return this.apiClient.callApi(
         '/api/v1/customer/listing', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
+        authNames, contentTypes, accepts, returnType, null, callback
       );
-    }
-
-    /**
-     * Customer Listing
-     * Get a list of highly-probable customers, investors, and partners/platforms of a target company, categorized by relationship type.  **Cost:** 1 credit/request + 2 credits/company returned. Credits are charged even when the request returns an empty result.
-     * @param {String} website The website URL of the target company
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.cursor Pagination cursor from `next_page` in a previous response
-     * @param {Number} opts.pageSize Number of results per page (1-200, default 200) (default to 200)
-     * @param {Boolean} opts.qualityFilter Filter out low-quality results (junk TLDs and unreachable websites) (default to true)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CustomerListingResponse}
-     */
-    getCustomerListing(website, opts) {
-      return this.getCustomerListingWithHttpInfo(website, opts)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
     }
 
 

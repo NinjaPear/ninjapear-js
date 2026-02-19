@@ -1,9 +1,9 @@
-# Ninjapear.CreditBalanceResponse
+# Ninjapear.EmployeeCountResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**creditBalance** | **Number** | Your current credit balance | [optional] 
+**employeeCount** | **Number** | Estimated employee count | [optional] 
 
 

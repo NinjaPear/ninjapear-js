@@ -1,4 +1,4 @@
-# NinjaPear.CustomerListingResponse
+# Ninjapear.CustomerListingResponse
 
 ## Properties
 

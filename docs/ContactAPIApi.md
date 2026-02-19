@@ -1,4 +1,4 @@
-# NinjaPear.ContactAPIApi
+# Ninjapear.ContactAPIApi
 
 All URIs are relative to *https://nubela.co*
 
@@ -19,20 +19,21 @@ Check if an email address is a disposable (temporary/throwaway) email or a free 
 ### Example
 
 ```javascript
-import NinjaPear from 'ninjapear';
-let defaultClient = NinjaPear.ApiClient.instance;
+import Ninjapear from 'ninjapear';
+let defaultClient = Ninjapear.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new NinjaPear.ContactAPIApi();
+let apiInstance = new Ninjapear.ContactAPIApi();
 let email = "test@mailinator.com"; // String | The email address to check
-apiInstance.checkDisposableEmail(email).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
+apiInstance.checkDisposableEmail(email, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
 });
-
 ```
 
 ### Parameters

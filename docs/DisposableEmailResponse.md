@@ -1,4 +1,4 @@
-# NinjaPear.DisposableEmailResponse
+# Ninjapear.DisposableEmailResponse
 
 ## Properties
 

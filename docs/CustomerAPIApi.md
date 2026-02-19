@@ -1,4 +1,4 @@
-# NinjaPear.CustomerAPIApi
+# Ninjapear.CustomerAPIApi
 
 All URIs are relative to *https://nubela.co*
 
@@ -19,25 +19,26 @@ Get a list of highly-probable customers, investors, and partners/platforms of a 
 ### Example
 
 ```javascript
-import NinjaPear from 'ninjapear';
-let defaultClient = NinjaPear.ApiClient.instance;
+import Ninjapear from 'ninjapear';
+let defaultClient = Ninjapear.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new NinjaPear.CustomerAPIApi();
+let apiInstance = new Ninjapear.CustomerAPIApi();
 let website = "https://www.stripe.com"; // String | The website URL of the target company
 let opts = {
   'cursor': "cursor_example", // String | Pagination cursor from `next_page` in a previous response
   'pageSize': 200, // Number | Number of results per page (1-200, default 200)
   'qualityFilter': true // Boolean | Filter out low-quality results (junk TLDs and unreachable websites)
 };
-apiInstance.getCustomerListing(website, opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
+apiInstance.getCustomerListing(website, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
 });
-
 ```
 
 ### Parameters

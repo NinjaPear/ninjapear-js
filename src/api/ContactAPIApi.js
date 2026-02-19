@@ -35,14 +35,22 @@ export default class ContactAPIApi {
     }
 
 
+    /**
+     * Callback function to receive the result of the checkDisposableEmail operation.
+     * @callback module:api/ContactAPIApi~checkDisposableEmailCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/DisposableEmailResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
 
     /**
      * Disposable Email Checker
      * Check if an email address is a disposable (temporary/throwaway) email or a free email provider.  **Cost:** FREE (0 credits)
      * @param {String} email The email address to check
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DisposableEmailResponse} and HTTP response
+     * @param {module:api/ContactAPIApi~checkDisposableEmailCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/DisposableEmailResponse}
      */
-    checkDisposableEmailWithHttpInfo(email) {
+    checkDisposableEmail(email, callback) {
       let postBody = null;
       // verify the required parameter 'email' is set
       if (email === undefined || email === null) {
@@ -66,21 +74,8 @@ export default class ContactAPIApi {
       return this.apiClient.callApi(
         '/api/v1/contact/disposable-email', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
+        authNames, contentTypes, accepts, returnType, null, callback
       );
-    }
-
-    /**
-     * Disposable Email Checker
-     * Check if an email address is a disposable (temporary/throwaway) email or a free email provider.  **Cost:** FREE (0 credits)
-     * @param {String} email The email address to check
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DisposableEmailResponse}
-     */
-    checkDisposableEmail(email) {
-      return this.checkDisposableEmailWithHttpInfo(email)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
     }
 
 

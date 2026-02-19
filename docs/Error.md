@@ -1,4 +1,4 @@
-# NinjaPear.Error
+# Ninjapear.Error
 
 ## Properties
 

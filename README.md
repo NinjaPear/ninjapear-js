@@ -1,6 +1,6 @@
 # ninjapear
 
-NinjaPear - JavaScript client for ninjapear
+Ninjapear - JavaScript client for ninjapear
 NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.
 
 As a data client of NinjaPear API, you can:
@@ -105,21 +105,26 @@ module: {
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-var NinjaPear = require('ninjapear');
+var Ninjapear = require('ninjapear');
 
-var defaultClient = NinjaPear.ApiClient.instance;
+var defaultClient = Ninjapear.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 var bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-var api = new NinjaPear.CompanyAPIApi()
+var api = new Ninjapear.CompanyAPIApi()
 var website = "https://www.stripe.com"; // {String} The website URL of the target company
-api.getCompanyLogo(website).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var opts = {
+  'includeEmployeeCount': false // {Boolean} Fetch fresh employee count data via web search. Adds 2 credits.
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getCompanyDetails(website, opts, callback);
 
 ```
 
@@ -129,19 +134,26 @@ All URIs are relative to *https://nubela.co*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*NinjaPear.CompanyAPIApi* | [**getCompanyLogo**](docs/CompanyAPIApi.md#getCompanyLogo) | **GET** /api/v1/company/logo | Company Logo
-*NinjaPear.ContactAPIApi* | [**checkDisposableEmail**](docs/ContactAPIApi.md#checkDisposableEmail) | **GET** /api/v1/contact/disposable-email | Disposable Email Checker
-*NinjaPear.CustomerAPIApi* | [**getCustomerListing**](docs/CustomerAPIApi.md#getCustomerListing) | **GET** /api/v1/customer/listing | Customer Listing
-*NinjaPear.MetaAPIApi* | [**getCreditBalance**](docs/MetaAPIApi.md#getCreditBalance) | **GET** /api/v1/meta/credit-balance | View Credit Balance
+*Ninjapear.CompanyAPIApi* | [**getCompanyDetails**](docs/CompanyAPIApi.md#getCompanyDetails) | **GET** /api/v1/company/details | Company Details
+*Ninjapear.CompanyAPIApi* | [**getCompanyLogo**](docs/CompanyAPIApi.md#getCompanyLogo) | **GET** /api/v1/company/logo | Company Logo
+*Ninjapear.CompanyAPIApi* | [**getEmployeeCount**](docs/CompanyAPIApi.md#getEmployeeCount) | **GET** /api/v1/company/employee-count | Employee Count
+*Ninjapear.ContactAPIApi* | [**checkDisposableEmail**](docs/ContactAPIApi.md#checkDisposableEmail) | **GET** /api/v1/contact/disposable-email | Disposable Email Checker
+*Ninjapear.CustomerAPIApi* | [**getCustomerListing**](docs/CustomerAPIApi.md#getCustomerListing) | **GET** /api/v1/customer/listing | Customer Listing
+*Ninjapear.MetaAPIApi* | [**getCreditBalance**](docs/MetaAPIApi.md#getCreditBalance) | **GET** /api/v1/meta/credit-balance | View Credit Balance
 
 
 ## Documentation for Models
 
- - [NinjaPear.CreditBalanceResponse](docs/CreditBalanceResponse.md)
- - [NinjaPear.CustomerCompany](docs/CustomerCompany.md)
- - [NinjaPear.CustomerListingResponse](docs/CustomerListingResponse.md)
- - [NinjaPear.DisposableEmailResponse](docs/DisposableEmailResponse.md)
- - [NinjaPear.Error](docs/Error.md)
+ - [Ninjapear.Address](docs/Address.md)
+ - [Ninjapear.CompanyDetailsResponse](docs/CompanyDetailsResponse.md)
+ - [Ninjapear.CreditBalanceResponse](docs/CreditBalanceResponse.md)
+ - [Ninjapear.CustomerCompany](docs/CustomerCompany.md)
+ - [Ninjapear.CustomerListingResponse](docs/CustomerListingResponse.md)
+ - [Ninjapear.DisposableEmailResponse](docs/DisposableEmailResponse.md)
+ - [Ninjapear.EmployeeCountResponse](docs/EmployeeCountResponse.md)
+ - [Ninjapear.Error](docs/Error.md)
+ - [Ninjapear.Executive](docs/Executive.md)
+ - [Ninjapear.PublicListing](docs/PublicListing.md)
 
 
 ## Documentation for Authorization

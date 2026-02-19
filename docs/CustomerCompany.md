@@ -1,4 +1,4 @@
-# NinjaPear.CustomerCompany
+# Ninjapear.CustomerCompany
 
 ## Properties
 

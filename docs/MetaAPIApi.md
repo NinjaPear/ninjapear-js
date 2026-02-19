@@ -1,4 +1,4 @@
-# NinjaPear.MetaAPIApi
+# Ninjapear.MetaAPIApi
 
 All URIs are relative to *https://nubela.co*
 
@@ -19,19 +19,20 @@ Get your current credit balance.  **Cost:** FREE (0 credits)
 ### Example
 
 ```javascript
-import NinjaPear from 'ninjapear';
-let defaultClient = NinjaPear.ApiClient.instance;
+import Ninjapear from 'ninjapear';
+let defaultClient = Ninjapear.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new NinjaPear.MetaAPIApi();
-apiInstance.getCreditBalance().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
+let apiInstance = new Ninjapear.MetaAPIApi();
+apiInstance.getCreditBalance((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
 });
-
 ```
 
 ### Parameters

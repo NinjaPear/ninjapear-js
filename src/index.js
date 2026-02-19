@@ -13,11 +13,16 @@
 
 
 import ApiClient from './ApiClient';
+import Address from './model/Address';
+import CompanyDetailsResponse from './model/CompanyDetailsResponse';
 import CreditBalanceResponse from './model/CreditBalanceResponse';
 import CustomerCompany from './model/CustomerCompany';
 import CustomerListingResponse from './model/CustomerListingResponse';
 import DisposableEmailResponse from './model/DisposableEmailResponse';
+import EmployeeCountResponse from './model/EmployeeCountResponse';
 import Error from './model/Error';
+import Executive from './model/Executive';
+import PublicListing from './model/PublicListing';
 import CompanyAPIApi from './api/CompanyAPIApi';
 import ContactAPIApi from './api/ContactAPIApi';
 import CustomerAPIApi from './api/CustomerAPIApi';
@@ -25,14 +30,14 @@ import MetaAPIApi from './api/MetaAPIApi';
 
 
 /**
-* NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance..<br>
+* JavaScript client for the NinjaPear API - B2B data platform for customer discovery.<br>
 * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
 * <pre>
-* var NinjaPear = require('index'); // See note below*.
-* var xxxSvc = new NinjaPear.XxxApi(); // Allocate the API class we're going to use.
-* var yyyModel = new NinjaPear.Yyy(); // Construct a model instance.
+* var Ninjapear = require('index'); // See note below*.
+* var xxxSvc = new Ninjapear.XxxApi(); // Allocate the API class we're going to use.
+* var yyyModel = new Ninjapear.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -44,8 +49,8 @@ import MetaAPIApi from './api/MetaAPIApi';
 * <p>
 * A non-AMD browser application (discouraged) might do something like this:
 * <pre>
-* var xxxSvc = new NinjaPear.XxxApi(); // Allocate the API class we're going to use.
-* var yyy = new NinjaPear.Yyy(); // Construct a model instance.
+* var xxxSvc = new Ninjapear.XxxApi(); // Allocate the API class we're going to use.
+* var yyy = new Ninjapear.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -61,6 +66,18 @@ export {
      * @property {module:ApiClient}
      */
     ApiClient,
+
+    /**
+     * The Address model constructor.
+     * @property {module:model/Address}
+     */
+    Address,
+
+    /**
+     * The CompanyDetailsResponse model constructor.
+     * @property {module:model/CompanyDetailsResponse}
+     */
+    CompanyDetailsResponse,
 
     /**
      * The CreditBalanceResponse model constructor.
@@ -87,10 +104,28 @@ export {
     DisposableEmailResponse,
 
     /**
+     * The EmployeeCountResponse model constructor.
+     * @property {module:model/EmployeeCountResponse}
+     */
+    EmployeeCountResponse,
+
+    /**
      * The Error model constructor.
      * @property {module:model/Error}
      */
     Error,
+
+    /**
+     * The Executive model constructor.
+     * @property {module:model/Executive}
+     */
+    Executive,
+
+    /**
+     * The PublicListing model constructor.
+     * @property {module:model/PublicListing}
+     */
+    PublicListing,
 
     /**
     * The CompanyAPIApi service constructor.

@@ -35,13 +35,21 @@ export default class MetaAPIApi {
     }
 
 
+    /**
+     * Callback function to receive the result of the getCreditBalance operation.
+     * @callback module:api/MetaAPIApi~getCreditBalanceCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CreditBalanceResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
 
     /**
      * View Credit Balance
      * Get your current credit balance.  **Cost:** FREE (0 credits)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CreditBalanceResponse} and HTTP response
+     * @param {module:api/MetaAPIApi~getCreditBalanceCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CreditBalanceResponse}
      */
-    getCreditBalanceWithHttpInfo() {
+    getCreditBalance(callback) {
       let postBody = null;
 
       let pathParams = {
@@ -60,20 +68,8 @@ export default class MetaAPIApi {
       return this.apiClient.callApi(
         '/api/v1/meta/credit-balance', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
+        authNames, contentTypes, accepts, returnType, null, callback
       );
-    }
-
-    /**
-     * View Credit Balance
-     * Get your current credit balance.  **Cost:** FREE (0 credits)
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CreditBalanceResponse}
-     */
-    getCreditBalance() {
-      return this.getCreditBalanceWithHttpInfo()
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
     }
 
 

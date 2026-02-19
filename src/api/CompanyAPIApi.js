@@ -13,6 +13,8 @@
 
 
 import ApiClient from "../ApiClient";
+import CompanyDetailsResponse from '../model/CompanyDetailsResponse';
+import EmployeeCountResponse from '../model/EmployeeCountResponse';
 import Error from '../model/Error';
 
 /**
@@ -34,14 +36,69 @@ export default class CompanyAPIApi {
     }
 
 
+    /**
+     * Callback function to receive the result of the getCompanyDetails operation.
+     * @callback module:api/CompanyAPIApi~getCompanyDetailsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CompanyDetailsResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Company Details
+     * Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count=true)
+     * @param {String} website The website URL of the target company
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} [includeEmployeeCount = false)] Fetch fresh employee count data via web search. Adds 2 credits.
+     * @param {module:api/CompanyAPIApi~getCompanyDetailsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CompanyDetailsResponse}
+     */
+    getCompanyDetails(website, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'website' is set
+      if (website === undefined || website === null) {
+        throw new Error("Missing the required parameter 'website' when calling getCompanyDetails");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'website': website,
+        'include_employee_count': opts['includeEmployeeCount']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CompanyDetailsResponse;
+      return this.apiClient.callApi(
+        '/api/v1/company/details', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getCompanyLogo operation.
+     * @callback module:api/CompanyAPIApi~getCompanyLogoCallback
+     * @param {String} error Error message, if any.
+     * @param {File} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
 
     /**
      * Company Logo
      * Retrieve the logo of a company given its website URL. Returns the logo as a PNG image (128x128).  **Cost:** FREE (0 credits)
      * @param {String} website The website URL of the target company
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link File} and HTTP response
+     * @param {module:api/CompanyAPIApi~getCompanyLogoCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link File}
      */
-    getCompanyLogoWithHttpInfo(website) {
+    getCompanyLogo(website, callback) {
       let postBody = null;
       // verify the required parameter 'website' is set
       if (website === undefined || website === null) {
@@ -65,21 +122,51 @@ export default class CompanyAPIApi {
       return this.apiClient.callApi(
         '/api/v1/company/logo', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
+        authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Company Logo
-     * Retrieve the logo of a company given its website URL. Returns the logo as a PNG image (128x128).  **Cost:** FREE (0 credits)
-     * @param {String} website The website URL of the target company
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link File}
+     * Callback function to receive the result of the getEmployeeCount operation.
+     * @callback module:api/CompanyAPIApi~getEmployeeCountCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/EmployeeCountResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
      */
-    getCompanyLogo(website) {
-      return this.getCompanyLogoWithHttpInfo(website)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
+
+    /**
+     * Employee Count
+     * Get the employee count for a company. Uses web search to find the most recent employee count information.  **Cost:** 2 credits
+     * @param {String} website The website URL of the target company
+     * @param {module:api/CompanyAPIApi~getEmployeeCountCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/EmployeeCountResponse}
+     */
+    getEmployeeCount(website, callback) {
+      let postBody = null;
+      // verify the required parameter 'website' is set
+      if (website === undefined || website === null) {
+        throw new Error("Missing the required parameter 'website' when calling getEmployeeCount");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'website': website
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = EmployeeCountResponse;
+      return this.apiClient.callApi(
+        '/api/v1/company/employee-count', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
     }
 
 
