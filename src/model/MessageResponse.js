@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The Error model module.
- * @module model/Error
+ * The MessageResponse model module.
+ * @module model/MessageResponse
  * @version 1.0.0
  */
-class Error {
+class MessageResponse {
     /**
-     * Constructs a new <code>Error</code>.
-     * @alias module:model/Error
+     * Constructs a new <code>MessageResponse</code>.
+     * @alias module:model/MessageResponse
      */
     constructor() { 
         
-        Error.initialize(this);
+        MessageResponse.initialize(this);
     }
 
     /**
@@ -37,32 +37,32 @@ class Error {
     }
 
     /**
-     * Constructs a <code>Error</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>MessageResponse</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Error} obj Optional instance to populate.
-     * @return {module:model/Error} The populated <code>Error</code> instance.
+     * @param {module:model/MessageResponse} obj Optional instance to populate.
+     * @return {module:model/MessageResponse} The populated <code>MessageResponse</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Error();
+            obj = obj || new MessageResponse();
 
-            if (data.hasOwnProperty('error')) {
-                obj['error'] = ApiClient.convertToType(data['error'], 'String');
+            if (data.hasOwnProperty('message')) {
+                obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>Error</code>.
+     * Validates the JSON data with respect to <code>MessageResponse</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Error</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>MessageResponse</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['error'] && !(typeof data['error'] === 'string' || data['error'] instanceof String)) {
-            throw new Error("Expected the field `error` to be a primitive type in the JSON string but got " + data['error']);
+        if (data['message'] && !(typeof data['message'] === 'string' || data['message'] instanceof String)) {
+            throw new Error("Expected the field `message` to be a primitive type in the JSON string but got " + data['message']);
         }
 
         return true;
@@ -74,15 +74,15 @@ class Error {
 
 
 /**
- * Error message
- * @member {String} error
+ * Confirmation message
+ * @member {String} message
  */
-Error.prototype['error'] = undefined;
+MessageResponse.prototype['message'] = undefined;
 
 
 
 
 
 
-export default Error;
+export default MessageResponse;
 

@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -13,8 +13,11 @@
 
 
 import ApiClient from './ApiClient';
+import AddTargetRequest from './model/AddTargetRequest';
 import Address from './model/Address';
 import CompanyDetailsResponse from './model/CompanyDetailsResponse';
+import CreateFeedRequest from './model/CreateFeedRequest';
+import CreateFeedRequestTargetsInner from './model/CreateFeedRequestTargetsInner';
 import CreditBalanceResponse from './model/CreditBalanceResponse';
 import CustomerCompany from './model/CustomerCompany';
 import CustomerListingResponse from './model/CustomerListingResponse';
@@ -22,11 +25,20 @@ import DisposableEmailResponse from './model/DisposableEmailResponse';
 import EmployeeCountResponse from './model/EmployeeCountResponse';
 import Error from './model/Error';
 import Executive from './model/Executive';
+import Feed from './model/Feed';
+import FeedListResponse from './model/FeedListResponse';
+import FeedSummary from './model/FeedSummary';
+import MessageResponse from './model/MessageResponse';
 import PublicListing from './model/PublicListing';
+import Target from './model/Target';
+import TargetSettings from './model/TargetSettings';
+import UpdateFeedRequest from './model/UpdateFeedRequest';
+import UpdateTargetRequest from './model/UpdateTargetRequest';
 import CompanyAPIApi from './api/CompanyAPIApi';
 import ContactAPIApi from './api/ContactAPIApi';
 import CustomerAPIApi from './api/CustomerAPIApi';
 import MetaAPIApi from './api/MetaAPIApi';
+import UpdatesAPIApi from './api/UpdatesAPIApi';
 
 
 /**
@@ -68,6 +80,12 @@ export {
     ApiClient,
 
     /**
+     * The AddTargetRequest model constructor.
+     * @property {module:model/AddTargetRequest}
+     */
+    AddTargetRequest,
+
+    /**
      * The Address model constructor.
      * @property {module:model/Address}
      */
@@ -78,6 +96,18 @@ export {
      * @property {module:model/CompanyDetailsResponse}
      */
     CompanyDetailsResponse,
+
+    /**
+     * The CreateFeedRequest model constructor.
+     * @property {module:model/CreateFeedRequest}
+     */
+    CreateFeedRequest,
+
+    /**
+     * The CreateFeedRequestTargetsInner model constructor.
+     * @property {module:model/CreateFeedRequestTargetsInner}
+     */
+    CreateFeedRequestTargetsInner,
 
     /**
      * The CreditBalanceResponse model constructor.
@@ -122,10 +152,58 @@ export {
     Executive,
 
     /**
+     * The Feed model constructor.
+     * @property {module:model/Feed}
+     */
+    Feed,
+
+    /**
+     * The FeedListResponse model constructor.
+     * @property {module:model/FeedListResponse}
+     */
+    FeedListResponse,
+
+    /**
+     * The FeedSummary model constructor.
+     * @property {module:model/FeedSummary}
+     */
+    FeedSummary,
+
+    /**
+     * The MessageResponse model constructor.
+     * @property {module:model/MessageResponse}
+     */
+    MessageResponse,
+
+    /**
      * The PublicListing model constructor.
      * @property {module:model/PublicListing}
      */
     PublicListing,
+
+    /**
+     * The Target model constructor.
+     * @property {module:model/Target}
+     */
+    Target,
+
+    /**
+     * The TargetSettings model constructor.
+     * @property {module:model/TargetSettings}
+     */
+    TargetSettings,
+
+    /**
+     * The UpdateFeedRequest model constructor.
+     * @property {module:model/UpdateFeedRequest}
+     */
+    UpdateFeedRequest,
+
+    /**
+     * The UpdateTargetRequest model constructor.
+     * @property {module:model/UpdateTargetRequest}
+     */
+    UpdateTargetRequest,
 
     /**
     * The CompanyAPIApi service constructor.
@@ -149,5 +227,11 @@ export {
     * The MetaAPIApi service constructor.
     * @property {module:api/MetaAPIApi}
     */
-    MetaAPIApi
+    MetaAPIApi,
+
+    /**
+    * The UpdatesAPIApi service constructor.
+    * @property {module:api/UpdatesAPIApi}
+    */
+    UpdatesAPIApi
 };

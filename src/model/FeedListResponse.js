@@ -12,20 +12,21 @@
  */
 
 import ApiClient from '../ApiClient';
+import FeedSummary from './FeedSummary';
 
 /**
- * The Error model module.
- * @module model/Error
+ * The FeedListResponse model module.
+ * @module model/FeedListResponse
  * @version 1.0.0
  */
-class Error {
+class FeedListResponse {
     /**
-     * Constructs a new <code>Error</code>.
-     * @alias module:model/Error
+     * Constructs a new <code>FeedListResponse</code>.
+     * @alias module:model/FeedListResponse
      */
     constructor() { 
         
-        Error.initialize(this);
+        FeedListResponse.initialize(this);
     }
 
     /**
@@ -37,32 +38,38 @@ class Error {
     }
 
     /**
-     * Constructs a <code>Error</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>FeedListResponse</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Error} obj Optional instance to populate.
-     * @return {module:model/Error} The populated <code>Error</code> instance.
+     * @param {module:model/FeedListResponse} obj Optional instance to populate.
+     * @return {module:model/FeedListResponse} The populated <code>FeedListResponse</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Error();
+            obj = obj || new FeedListResponse();
 
-            if (data.hasOwnProperty('error')) {
-                obj['error'] = ApiClient.convertToType(data['error'], 'String');
+            if (data.hasOwnProperty('feeds')) {
+                obj['feeds'] = ApiClient.convertToType(data['feeds'], [FeedSummary]);
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>Error</code>.
+     * Validates the JSON data with respect to <code>FeedListResponse</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Error</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>FeedListResponse</code>.
      */
     static validateJSON(data) {
-        // ensure the json data is a string
-        if (data['error'] && !(typeof data['error'] === 'string' || data['error'] instanceof String)) {
-            throw new Error("Expected the field `error` to be a primitive type in the JSON string but got " + data['error']);
+        if (data['feeds']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['feeds'])) {
+                throw new Error("Expected the field `feeds` to be an array in the JSON data but got " + data['feeds']);
+            }
+            // validate the optional field `feeds` (array)
+            for (const item of data['feeds']) {
+                FeedSummary.validateJSON(item);
+            };
         }
 
         return true;
@@ -74,15 +81,15 @@ class Error {
 
 
 /**
- * Error message
- * @member {String} error
+ * List of feeds
+ * @member {Array.<module:model/FeedSummary>} feeds
  */
-Error.prototype['error'] = undefined;
+FeedListResponse.prototype['feeds'] = undefined;
 
 
 
 
 
 
-export default Error;
+export default FeedListResponse;
 

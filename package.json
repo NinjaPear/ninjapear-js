@@ -1,6 +1,6 @@
 {
   "name": "ninjapear",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "JavaScript client for the NinjaPear API - B2B data platform for customer discovery",
   "license": "MIT",
   "main": "dist/index.js",
