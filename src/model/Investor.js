@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The UpdateFeedRequest model module.
- * @module model/UpdateFeedRequest
+ * The Investor model module.
+ * @module model/Investor
  * @version 1.3.0
  */
-class UpdateFeedRequest {
+class Investor {
     /**
-     * Constructs a new <code>UpdateFeedRequest</code>.
-     * @alias module:model/UpdateFeedRequest
+     * Constructs a new <code>Investor</code>.
+     * @alias module:model/Investor
      */
     constructor() { 
         
-        UpdateFeedRequest.initialize(this);
+        Investor.initialize(this);
     }
 
     /**
@@ -37,36 +37,36 @@ class UpdateFeedRequest {
     }
 
     /**
-     * Constructs a <code>UpdateFeedRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>Investor</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/UpdateFeedRequest} obj Optional instance to populate.
-     * @return {module:model/UpdateFeedRequest} The populated <code>UpdateFeedRequest</code> instance.
+     * @param {module:model/Investor} obj Optional instance to populate.
+     * @return {module:model/Investor} The populated <code>Investor</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new UpdateFeedRequest();
+            obj = obj || new Investor();
 
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
-            if (data.hasOwnProperty('is_public')) {
-                obj['is_public'] = ApiClient.convertToType(data['is_public'], 'Boolean');
+            if (data.hasOwnProperty('website')) {
+                obj['website'] = ApiClient.convertToType(data['website'], 'String');
             }
-            if (data.hasOwnProperty('is_suspended')) {
-                obj['is_suspended'] = ApiClient.convertToType(data['is_suspended'], 'Boolean');
+            if (data.hasOwnProperty('type')) {
+                obj['type'] = ApiClient.convertToType(data['type'], 'String');
             }
-            if (data.hasOwnProperty('suspension_reason')) {
-                obj['suspension_reason'] = ApiClient.convertToType(data['suspension_reason'], 'String');
+            if (data.hasOwnProperty('amount_usd')) {
+                obj['amount_usd'] = ApiClient.convertToType(data['amount_usd'], 'Number');
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>UpdateFeedRequest</code>.
+     * Validates the JSON data with respect to <code>Investor</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UpdateFeedRequest</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Investor</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
@@ -74,8 +74,12 @@ class UpdateFeedRequest {
             throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
         }
         // ensure the json data is a string
-        if (data['suspension_reason'] && !(typeof data['suspension_reason'] === 'string' || data['suspension_reason'] instanceof String)) {
-            throw new Error("Expected the field `suspension_reason` to be a primitive type in the JSON string but got " + data['suspension_reason']);
+        if (data['website'] && !(typeof data['website'] === 'string' || data['website'] instanceof String)) {
+            throw new Error("Expected the field `website` to be a primitive type in the JSON string but got " + data['website']);
+        }
+        // ensure the json data is a string
+        if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
+            throw new Error("Expected the field `type` to be a primitive type in the JSON string but got " + data['type']);
         }
 
         return true;
@@ -87,48 +91,54 @@ class UpdateFeedRequest {
 
 
 /**
- * New feed name
+ * Investor name
  * @member {String} name
  */
-UpdateFeedRequest.prototype['name'] = undefined;
+Investor.prototype['name'] = undefined;
 
 /**
- * Whether the RSS feed should be publicly accessible
- * @member {Boolean} is_public
+ * Investor website URL
+ * @member {String} website
  */
-UpdateFeedRequest.prototype['is_public'] = undefined;
+Investor.prototype['website'] = undefined;
 
 /**
- * Manually suspend or resume the feed
- * @member {Boolean} is_suspended
+ * Type of investor
+ * @member {module:model/Investor.TypeEnum} type
  */
-UpdateFeedRequest.prototype['is_suspended'] = undefined;
+Investor.prototype['type'] = undefined;
 
 /**
- * Reason for suspension (required when is_suspended=true)
- * @member {module:model/UpdateFeedRequest.SuspensionReasonEnum} suspension_reason
+ * Amount invested in USD (if known)
+ * @member {Number} amount_usd
  */
-UpdateFeedRequest.prototype['suspension_reason'] = undefined;
+Investor.prototype['amount_usd'] = undefined;
 
 
 
 
 
 /**
- * Allowed values for the <code>suspension_reason</code> property.
+ * Allowed values for the <code>type</code> property.
  * @enum {String}
  * @readonly
  */
-UpdateFeedRequest['SuspensionReasonEnum'] = {
+Investor['TypeEnum'] = {
 
     /**
-     * value: "manual"
+     * value: "company"
      * @const
      */
-    "manual": "manual"
+    "company": "company",
+
+    /**
+     * value: "angel"
+     * @const
+     */
+    "angel": "angel"
 };
 
 
 
-export default UpdateFeedRequest;
+export default Investor;
 

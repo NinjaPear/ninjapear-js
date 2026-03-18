@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -14,13 +14,15 @@
 
 import ApiClient from "../ApiClient";
 import CompanyDetailsResponse from '../model/CompanyDetailsResponse';
+import CompanyFundingResponse from '../model/CompanyFundingResponse';
+import CompanyUpdatesResponse from '../model/CompanyUpdatesResponse';
 import EmployeeCountResponse from '../model/EmployeeCountResponse';
 import Error from '../model/Error';
 
 /**
 * CompanyAPI service.
 * @module api/CompanyAPIApi
-* @version 1.0.0
+* @version 1.3.0
 */
 export default class CompanyAPIApi {
 
@@ -46,10 +48,11 @@ export default class CompanyAPIApi {
 
     /**
      * Company Details
-     * Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count=true)
+     * Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count=true, +1 credit if follower_count=include)
      * @param {String} website The website URL of the target company
      * @param {Object} opts Optional parameters
      * @param {Boolean} [includeEmployeeCount = false)] Fetch fresh employee count data via web search. Adds 2 credits.
+     * @param {module:model/String} [followerCount] Set to 'include' to fetch Twitter/X follower and following counts. Adds 1 credit.
      * @param {module:api/CompanyAPIApi~getCompanyDetailsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CompanyDetailsResponse}
      */
@@ -65,7 +68,8 @@ export default class CompanyAPIApi {
       };
       let queryParams = {
         'website': website,
-        'include_employee_count': opts['includeEmployeeCount']
+        'include_employee_count': opts['includeEmployeeCount'],
+        'follower_count': opts['followerCount']
       };
       let headerParams = {
       };
@@ -78,6 +82,49 @@ export default class CompanyAPIApi {
       let returnType = CompanyDetailsResponse;
       return this.apiClient.callApi(
         '/api/v1/company/details', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getCompanyFunding operation.
+     * @callback module:api/CompanyAPIApi~getCompanyFundingCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CompanyFundingResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Company Funding
+     * Retrieve the funding history of a company including all funding rounds and investors.  **Cost:** 2 credits + 1 credit per unique investor returned
+     * @param {String} website The website URL of the target company
+     * @param {module:api/CompanyAPIApi~getCompanyFundingCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CompanyFundingResponse}
+     */
+    getCompanyFunding(website, callback) {
+      let postBody = null;
+      // verify the required parameter 'website' is set
+      if (website === undefined || website === null) {
+        throw new Error("Missing the required parameter 'website' when calling getCompanyFunding");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'website': website
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CompanyFundingResponse;
+      return this.apiClient.callApi(
+        '/api/v1/company/funding', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -121,6 +168,49 @@ export default class CompanyAPIApi {
       let returnType = File;
       return this.apiClient.callApi(
         '/api/v1/company/logo', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getCompanyUpdates operation.
+     * @callback module:api/CompanyAPIApi~getCompanyUpdatesCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CompanyUpdatesResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Company Updates
+     * Retrieve recent blog posts and X/Twitter updates for a company.  **Cost:** 2 credits
+     * @param {String} website The website URL of the target company
+     * @param {module:api/CompanyAPIApi~getCompanyUpdatesCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CompanyUpdatesResponse}
+     */
+    getCompanyUpdates(website, callback) {
+      let postBody = null;
+      // verify the required parameter 'website' is set
+      if (website === undefined || website === null) {
+        throw new Error("Missing the required parameter 'website' when calling getCompanyUpdates");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'website': website
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CompanyUpdatesResponse;
+      return this.apiClient.callApi(
+        '/api/v1/company/updates', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

@@ -13,19 +13,19 @@
 
 
 import ApiClient from "../ApiClient";
-import CustomerListingResponse from '../model/CustomerListingResponse';
 import Error from '../model/Error';
+import PersonProfileResponse from '../model/PersonProfileResponse';
 
 /**
-* CustomerAPI service.
-* @module api/CustomerAPIApi
+* EmployeeAPI service.
+* @module api/EmployeeAPIApi
 * @version 1.3.0
 */
-export default class CustomerAPIApi {
+export default class EmployeeAPIApi {
 
     /**
-    * Constructs a new CustomerAPIApi. 
-    * @alias module:api/CustomerAPIApi
+    * Constructs a new EmployeeAPIApi. 
+    * @alias module:api/EmployeeAPIApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -36,39 +36,43 @@ export default class CustomerAPIApi {
 
 
     /**
-     * Callback function to receive the result of the getCustomerListing operation.
-     * @callback module:api/CustomerAPIApi~getCustomerListingCallback
+     * Callback function to receive the result of the getPersonProfile operation.
+     * @callback module:api/EmployeeAPIApi~getPersonProfileCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/CustomerListingResponse} data The data returned by the service call.
+     * @param {module:model/PersonProfileResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Customer Listing
-     * Get a list of highly-probable customers, investors, and partners/platforms of a target company, categorized by relationship type.  **Cost:** 1 credit/request + 2 credits/company returned. Credits are charged even when the request returns an empty result.
-     * @param {String} website The website URL of the target company
+     * Person Profile Enrichment
+     * Enrich a person's professional profile including work experience, education, and social media presence. Provide at least one of the following combinations: - `work_email` - `first_name` + `employer_website` - `employer_website` + `role` - `slug` or `id` for direct lookup  **Cost:** 3 credits
      * @param {Object} opts Optional parameters
-     * @param {String} [cursor] Pagination cursor from `next_page` in a previous response
-     * @param {Number} [pageSize = 200)] Number of results per page (1-200, default 200)
-     * @param {Boolean} [qualityFilter = true)] Filter out low-quality results (junk TLDs and unreachable websites)
-     * @param {module:api/CustomerAPIApi~getCustomerListingCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/CustomerListingResponse}
+     * @param {String} [workEmail] Person's work email address
+     * @param {String} [firstName] Person's first name
+     * @param {String} [middleName] Person's middle name
+     * @param {String} [lastName] Person's last name
+     * @param {String} [employerWebsite] Employer's website URL
+     * @param {String} [role] Job role/title
+     * @param {String} [slug] Person's unique slug identifier (direct lookup)
+     * @param {String} [id] Person's unique ID (direct lookup)
+     * @param {module:api/EmployeeAPIApi~getPersonProfileCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/PersonProfileResponse}
      */
-    getCustomerListing(website, opts, callback) {
+    getPersonProfile(opts, callback) {
       opts = opts || {};
       let postBody = null;
-      // verify the required parameter 'website' is set
-      if (website === undefined || website === null) {
-        throw new Error("Missing the required parameter 'website' when calling getCustomerListing");
-      }
 
       let pathParams = {
       };
       let queryParams = {
-        'website': website,
-        'cursor': opts['cursor'],
-        'page_size': opts['pageSize'],
-        'quality_filter': opts['qualityFilter']
+        'work_email': opts['workEmail'],
+        'first_name': opts['firstName'],
+        'middle_name': opts['middleName'],
+        'last_name': opts['lastName'],
+        'employer_website': opts['employerWebsite'],
+        'role': opts['role'],
+        'slug': opts['slug'],
+        'id': opts['id']
       };
       let headerParams = {
       };
@@ -78,9 +82,9 @@ export default class CustomerAPIApi {
       let authNames = ['bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = CustomerListingResponse;
+      let returnType = PersonProfileResponse;
       return this.apiClient.callApi(
-        '/api/v1/customer/listing', 'GET',
+        '/api/v1/employee/profile', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

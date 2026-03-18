@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -19,7 +19,7 @@ import PublicListing from './PublicListing';
 /**
  * The CompanyDetailsResponse model module.
  * @module model/CompanyDetailsResponse
- * @version 1.0.0
+ * @version 1.3.0
  */
 class CompanyDetailsResponse {
     /**
@@ -107,6 +107,21 @@ class CompanyDetailsResponse {
             if (data.hasOwnProperty('public_listing')) {
                 obj['public_listing'] = ApiClient.convertToType(data['public_listing'], PublicListing);
             }
+            if (data.hasOwnProperty('follower_count')) {
+                obj['follower_count'] = ApiClient.convertToType(data['follower_count'], 'Number');
+            }
+            if (data.hasOwnProperty('following_count')) {
+                obj['following_count'] = ApiClient.convertToType(data['following_count'], 'Number');
+            }
+            if (data.hasOwnProperty('similar_companies')) {
+                obj['similar_companies'] = ApiClient.convertToType(data['similar_companies'], 'String');
+            }
+            if (data.hasOwnProperty('updates')) {
+                obj['updates'] = ApiClient.convertToType(data['updates'], 'String');
+            }
+            if (data.hasOwnProperty('funding')) {
+                obj['funding'] = ApiClient.convertToType(data['funding'], 'String');
+            }
         }
         return obj;
     }
@@ -184,6 +199,18 @@ class CompanyDetailsResponse {
         // validate the optional field `public_listing`
         if (data['public_listing']) { // data not null
           PublicListing.validateJSON(data['public_listing']);
+        }
+        // ensure the json data is a string
+        if (data['similar_companies'] && !(typeof data['similar_companies'] === 'string' || data['similar_companies'] instanceof String)) {
+            throw new Error("Expected the field `similar_companies` to be a primitive type in the JSON string but got " + data['similar_companies']);
+        }
+        // ensure the json data is a string
+        if (data['updates'] && !(typeof data['updates'] === 'string' || data['updates'] instanceof String)) {
+            throw new Error("Expected the field `updates` to be a primitive type in the JSON string but got " + data['updates']);
+        }
+        // ensure the json data is a string
+        if (data['funding'] && !(typeof data['funding'] === 'string' || data['funding'] instanceof String)) {
+            throw new Error("Expected the field `funding` to be a primitive type in the JSON string but got " + data['funding']);
         }
 
         return true;
@@ -307,6 +334,36 @@ CompanyDetailsResponse.prototype['executives'] = undefined;
  * @member {module:model/PublicListing} public_listing
  */
 CompanyDetailsResponse.prototype['public_listing'] = undefined;
+
+/**
+ * Twitter/X follower count (only included when follower_count=include query param is used)
+ * @member {Number} follower_count
+ */
+CompanyDetailsResponse.prototype['follower_count'] = undefined;
+
+/**
+ * Twitter/X following count (only included when follower_count=include query param is used)
+ * @member {Number} following_count
+ */
+CompanyDetailsResponse.prototype['following_count'] = undefined;
+
+/**
+ * URL to the competitor listing endpoint for this company
+ * @member {String} similar_companies
+ */
+CompanyDetailsResponse.prototype['similar_companies'] = undefined;
+
+/**
+ * URL to the company updates endpoint for this company
+ * @member {String} updates
+ */
+CompanyDetailsResponse.prototype['updates'] = undefined;
+
+/**
+ * URL to the company funding endpoint for this company
+ * @member {String} funding
+ */
+CompanyDetailsResponse.prototype['funding'] = undefined;
 
 
 

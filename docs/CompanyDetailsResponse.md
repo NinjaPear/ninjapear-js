@@ -23,6 +23,11 @@ Name | Type | Description | Notes
 **addresses** | [**[Address]**](Address.md) | List of company addresses | [optional] 
 **executives** | [**[Executive]**](Executive.md) | List of company executives and board members | [optional] 
 **publicListing** | [**PublicListing**](PublicListing.md) | Public company data. Null for private companies. | [optional] 
+**followerCount** | **Number** | Twitter/X follower count (only included when follower_count&#x3D;include query param is used) | [optional] 
+**followingCount** | **Number** | Twitter/X following count (only included when follower_count&#x3D;include query param is used) | [optional] 
+**similarCompanies** | **String** | URL to the competitor listing endpoint for this company | [optional] 
+**updates** | **String** | URL to the company updates endpoint for this company | [optional] 
+**funding** | **String** | URL to the company funding endpoint for this company | [optional] 
 
 
 
