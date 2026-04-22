@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles. 9. Discover competitors of any company (by keyword overlap and product overlap).
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -17,7 +17,7 @@ import FundingRound from './FundingRound';
 /**
  * The CompanyFundingResponse model module.
  * @module model/CompanyFundingResponse
- * @version 1.3.0
+ * @version 1.0.0
  */
 class CompanyFundingResponse {
     /**
@@ -48,11 +48,23 @@ class CompanyFundingResponse {
         if (data) {
             obj = obj || new CompanyFundingResponse();
 
+            if (data.hasOwnProperty('website')) {
+                obj['website'] = ApiClient.convertToType(data['website'], 'String');
+            }
             if (data.hasOwnProperty('total_funds_raised_usd')) {
                 obj['total_funds_raised_usd'] = ApiClient.convertToType(data['total_funds_raised_usd'], 'Number');
             }
             if (data.hasOwnProperty('funding_rounds')) {
                 obj['funding_rounds'] = ApiClient.convertToType(data['funding_rounds'], [FundingRound]);
+            }
+            if (data.hasOwnProperty('credit_cost')) {
+                obj['credit_cost'] = ApiClient.convertToType(data['credit_cost'], 'Number');
+            }
+            if (data.hasOwnProperty('error')) {
+                obj['error'] = ApiClient.convertToType(data['error'], 'String');
+            }
+            if (data.hasOwnProperty('error_code')) {
+                obj['error_code'] = ApiClient.convertToType(data['error_code'], 'String');
             }
         }
         return obj;
@@ -64,6 +76,10 @@ class CompanyFundingResponse {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CompanyFundingResponse</code>.
      */
     static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['website'] && !(typeof data['website'] === 'string' || data['website'] instanceof String)) {
+            throw new Error("Expected the field `website` to be a primitive type in the JSON string but got " + data['website']);
+        }
         if (data['funding_rounds']) { // data not null
             // ensure the json data is an array
             if (!Array.isArray(data['funding_rounds'])) {
@@ -73,6 +89,14 @@ class CompanyFundingResponse {
             for (const item of data['funding_rounds']) {
                 FundingRound.validateJSON(item);
             };
+        }
+        // ensure the json data is a string
+        if (data['error'] && !(typeof data['error'] === 'string' || data['error'] instanceof String)) {
+            throw new Error("Expected the field `error` to be a primitive type in the JSON string but got " + data['error']);
+        }
+        // ensure the json data is a string
+        if (data['error_code'] && !(typeof data['error_code'] === 'string' || data['error_code'] instanceof String)) {
+            throw new Error("Expected the field `error_code` to be a primitive type in the JSON string but got " + data['error_code']);
         }
 
         return true;
@@ -84,19 +108,64 @@ class CompanyFundingResponse {
 
 
 /**
+ * The company domain the response describes, echoed from the request.
+ * @member {String} website
+ */
+CompanyFundingResponse.prototype['website'] = undefined;
+
+/**
  * Total funds raised across all rounds in USD
  * @member {Number} total_funds_raised_usd
  */
 CompanyFundingResponse.prototype['total_funds_raised_usd'] = undefined;
 
 /**
- * List of funding rounds
+ * List of funding rounds. Empty array on fresh-path failures (see `error_code`).
  * @member {Array.<module:model/FundingRound>} funding_rounds
  */
 CompanyFundingResponse.prototype['funding_rounds'] = undefined;
 
+/**
+ * Total credits charged for this call (2 base + 1 per unique investor). Delivered in the response body rather than the `X-NinjaPear-Credit-Cost` header on cache misses, because streaming responses cannot set HTTP trailers.
+ * @member {Number} credit_cost
+ */
+CompanyFundingResponse.prototype['credit_cost'] = undefined;
+
+/**
+ * Error message when funding data could not be extracted. Only present alongside `error_code`.
+ * @member {String} error
+ */
+CompanyFundingResponse.prototype['error'] = undefined;
+
+/**
+ * Present only on fresh-path failures (HTTP 200, streaming). Clients that previously branched on `status_code == 404` should branch on this field. `no_funding_data` still charges the 2-credit base; `service_temp_unavailable` is not charged.
+ * @member {module:model/CompanyFundingResponse.ErrorCodeEnum} error_code
+ */
+CompanyFundingResponse.prototype['error_code'] = undefined;
 
 
+
+
+
+/**
+ * Allowed values for the <code>error_code</code> property.
+ * @enum {String}
+ * @readonly
+ */
+CompanyFundingResponse['ErrorCodeEnum'] = {
+
+    /**
+     * value: "no_funding_data"
+     * @const
+     */
+    "no_funding_data": "no_funding_data",
+
+    /**
+     * value: "service_temp_unavailable"
+     * @const
+     */
+    "service_temp_unavailable": "service_temp_unavailable"
+};
 
 
 

@@ -26,7 +26,7 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Ninjapear.CustomerAPIApi();
-let website = "https://www.stripe.com"; // String | The website URL of the target company
+let website = "https://www.stripe.com"; // String | The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
 let opts = {
   'cursor': "cursor_example", // String | Pagination cursor from `next_page` in a previous response
   'pageSize': 200, // Number | Number of results per page (1-200, default 200)
@@ -46,7 +46,7 @@ apiInstance.getCustomerListing(website, opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **website** | **String**| The website URL of the target company | 
+ **website** | **String**| The website URL or company name of the target company. A website URL (e.g. &#x60;https://www.stripe.com&#x60;) is strongly recommended for precision. | 
  **cursor** | **String**| Pagination cursor from &#x60;next_page&#x60; in a previous response | [optional] 
  **pageSize** | **Number**| Number of results per page (1-200, default 200) | [optional] [default to 200]
  **qualityFilter** | **Boolean**| Filter out low-quality results (junk TLDs and unreachable websites) | [optional] [default to true]

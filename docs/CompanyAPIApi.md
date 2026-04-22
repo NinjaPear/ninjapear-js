@@ -30,7 +30,7 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Ninjapear.CompanyAPIApi();
-let website = "https://www.stripe.com"; // String | The website URL of the target company
+let website = "https://www.stripe.com"; // String | The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
 let opts = {
   'includeEmployeeCount': false, // Boolean | Fetch fresh employee count data via web search. Adds 2 credits.
   'followerCount': "followerCount_example" // String | Set to 'include' to fetch Twitter/X follower and following counts. Adds 1 credit.
@@ -49,7 +49,7 @@ apiInstance.getCompanyDetails(website, opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **website** | **String**| The website URL of the target company | 
+ **website** | **String**| The website URL or company name of the target company. A website URL (e.g. &#x60;https://www.stripe.com&#x60;) is strongly recommended for precision. | 
  **includeEmployeeCount** | **Boolean**| Fetch fresh employee count data via web search. Adds 2 credits. | [optional] [default to false]
  **followerCount** | **String**| Set to &#39;include&#39; to fetch Twitter/X follower and following counts. Adds 1 credit. | [optional] 
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 Company Funding
 
-Retrieve the funding history of a company including all funding rounds and investors.  **Cost:** 2 credits + 1 credit per unique investor returned
+Retrieve the funding history of a company including all funding rounds and investors.  On cache miss this endpoint streams a single JSON object with whitespace heartbeats while Google AI Mode and LLM extraction run; set your HTTP client read timeout to at least 180 seconds. Cache hits return immediately. Fresh-path failures are delivered as HTTP 200 with &#x60;error&#x60; and &#x60;error_code&#x60; fields in the response body (see &#x60;CompanyFundingResponse&#x60;) because streaming responses cannot set late status codes.  **Cost:** 2 credits + 1 credit per unique investor returned
 
 ### Example
 
@@ -85,7 +85,7 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Ninjapear.CompanyAPIApi();
-let website = "https://www.stripe.com"; // String | The website URL of the target company
+let website = "https://www.stripe.com"; // String | The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
 apiInstance.getCompanyFunding(website, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -100,7 +100,7 @@ apiInstance.getCompanyFunding(website, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **website** | **String**| The website URL of the target company | 
+ **website** | **String**| The website URL or company name of the target company. A website URL (e.g. &#x60;https://www.stripe.com&#x60;) is strongly recommended for precision. | 
 
 ### Return type
 
@@ -183,7 +183,7 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Ninjapear.CompanyAPIApi();
-let website = "https://www.stripe.com"; // String | The website URL of the target company
+let website = "https://www.stripe.com"; // String | The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
 apiInstance.getCompanyUpdates(website, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -198,7 +198,7 @@ apiInstance.getCompanyUpdates(website, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **website** | **String**| The website URL of the target company | 
+ **website** | **String**| The website URL or company name of the target company. A website URL (e.g. &#x60;https://www.stripe.com&#x60;) is strongly recommended for precision. | 
 
 ### Return type
 
@@ -232,7 +232,7 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Ninjapear.CompanyAPIApi();
-let website = "https://www.stripe.com"; // String | The website URL of the target company
+let website = "https://www.stripe.com"; // String | The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
 apiInstance.getEmployeeCount(website, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -247,7 +247,7 @@ apiInstance.getEmployeeCount(website, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **website** | **String**| The website URL of the target company | 
+ **website** | **String**| The website URL or company name of the target company. A website URL (e.g. &#x60;https://www.stripe.com&#x60;) is strongly recommended for precision. | 
 
 ### Return type
 

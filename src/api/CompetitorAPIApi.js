@@ -13,19 +13,19 @@
 
 
 import ApiClient from "../ApiClient";
-import CustomerListingResponse from '../model/CustomerListingResponse';
+import CompetitorListingResponse from '../model/CompetitorListingResponse';
 import Error from '../model/Error';
 
 /**
-* CustomerAPI service.
-* @module api/CustomerAPIApi
+* CompetitorAPI service.
+* @module api/CompetitorAPIApi
 * @version 1.0.0
 */
-export default class CustomerAPIApi {
+export default class CompetitorAPIApi {
 
     /**
-    * Constructs a new CustomerAPIApi. 
-    * @alias module:api/CustomerAPIApi
+    * Constructs a new CompetitorAPIApi. 
+    * @alias module:api/CompetitorAPIApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -36,39 +36,31 @@ export default class CustomerAPIApi {
 
 
     /**
-     * Callback function to receive the result of the getCustomerListing operation.
-     * @callback module:api/CustomerAPIApi~getCustomerListingCallback
+     * Callback function to receive the result of the getCompetitorListing operation.
+     * @callback module:api/CompetitorAPIApi~getCompetitorListingCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/CustomerListingResponse} data The data returned by the service call.
+     * @param {module:model/CompetitorListingResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Customer Listing
-     * Get a list of highly-probable customers, investors, and partners/platforms of a target company, categorized by relationship type.  **Cost:** 1 credit/request + 2 credits/company returned. Credits are charged even when the request returns an empty result.
+     * Competitor Listing
+     * Discover direct business competitors of a target company. Competitors are identified via organic keyword overlap and AI-powered product comparison.  **Cost:** 2 credits/competitor returned. Minimum 5 credits per request.
      * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
-     * @param {Object} opts Optional parameters
-     * @param {String} [cursor] Pagination cursor from `next_page` in a previous response
-     * @param {Number} [pageSize = 200)] Number of results per page (1-200, default 200)
-     * @param {Boolean} [qualityFilter = true)] Filter out low-quality results (junk TLDs and unreachable websites)
-     * @param {module:api/CustomerAPIApi~getCustomerListingCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/CustomerListingResponse}
+     * @param {module:api/CompetitorAPIApi~getCompetitorListingCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CompetitorListingResponse}
      */
-    getCustomerListing(website, opts, callback) {
-      opts = opts || {};
+    getCompetitorListing(website, callback) {
       let postBody = null;
       // verify the required parameter 'website' is set
       if (website === undefined || website === null) {
-        throw new Error("Missing the required parameter 'website' when calling getCustomerListing");
+        throw new Error("Missing the required parameter 'website' when calling getCompetitorListing");
       }
 
       let pathParams = {
       };
       let queryParams = {
-        'website': website,
-        'cursor': opts['cursor'],
-        'page_size': opts['pageSize'],
-        'quality_filter': opts['qualityFilter']
+        'website': website
       };
       let headerParams = {
       };
@@ -78,9 +70,9 @@ export default class CustomerAPIApi {
       let authNames = ['bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = CustomerListingResponse;
+      let returnType = CompetitorListingResponse;
       return this.apiClient.callApi(
-        '/api/v1/customer/listing', 'GET',
+        '/api/v1/competitor/listing', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

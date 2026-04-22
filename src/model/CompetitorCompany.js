@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The Investor model module.
- * @module model/Investor
+ * The CompetitorCompany model module.
+ * @module model/CompetitorCompany
  * @version 1.0.0
  */
-class Investor {
+class CompetitorCompany {
     /**
-     * Constructs a new <code>Investor</code>.
-     * @alias module:model/Investor
+     * Constructs a new <code>CompetitorCompany</code>.
+     * @alias module:model/CompetitorCompany
      */
     constructor() { 
         
-        Investor.initialize(this);
+        CompetitorCompany.initialize(this);
     }
 
     /**
@@ -37,49 +37,46 @@ class Investor {
     }
 
     /**
-     * Constructs a <code>Investor</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>CompetitorCompany</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Investor} obj Optional instance to populate.
-     * @return {module:model/Investor} The populated <code>Investor</code> instance.
+     * @param {module:model/CompetitorCompany} obj Optional instance to populate.
+     * @return {module:model/CompetitorCompany} The populated <code>CompetitorCompany</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Investor();
+            obj = obj || new CompetitorCompany();
 
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            if (data.hasOwnProperty('company_details_url')) {
+                obj['company_details_url'] = ApiClient.convertToType(data['company_details_url'], 'String');
             }
             if (data.hasOwnProperty('website')) {
                 obj['website'] = ApiClient.convertToType(data['website'], 'String');
             }
-            if (data.hasOwnProperty('type')) {
-                obj['type'] = ApiClient.convertToType(data['type'], 'String');
-            }
-            if (data.hasOwnProperty('amount_usd')) {
-                obj['amount_usd'] = ApiClient.convertToType(data['amount_usd'], 'Number');
+            if (data.hasOwnProperty('competition_reason')) {
+                obj['competition_reason'] = ApiClient.convertToType(data['competition_reason'], 'String');
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>Investor</code>.
+     * Validates the JSON data with respect to <code>CompetitorCompany</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Investor</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CompetitorCompany</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        if (data['company_details_url'] && !(typeof data['company_details_url'] === 'string' || data['company_details_url'] instanceof String)) {
+            throw new Error("Expected the field `company_details_url` to be a primitive type in the JSON string but got " + data['company_details_url']);
         }
         // ensure the json data is a string
         if (data['website'] && !(typeof data['website'] === 'string' || data['website'] instanceof String)) {
             throw new Error("Expected the field `website` to be a primitive type in the JSON string but got " + data['website']);
         }
         // ensure the json data is a string
-        if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
-            throw new Error("Expected the field `type` to be a primitive type in the JSON string but got " + data['type']);
+        if (data['competition_reason'] && !(typeof data['competition_reason'] === 'string' || data['competition_reason'] instanceof String)) {
+            throw new Error("Expected the field `competition_reason` to be a primitive type in the JSON string but got " + data['competition_reason']);
         }
 
         return true;
@@ -91,54 +88,48 @@ class Investor {
 
 
 /**
- * Investor name
- * @member {String} name
+ * URL to the Company Details API endpoint for this competitor
+ * @member {String} company_details_url
  */
-Investor.prototype['name'] = undefined;
+CompetitorCompany.prototype['company_details_url'] = undefined;
 
 /**
- * Investor website URL
+ * Company website URL
  * @member {String} website
  */
-Investor.prototype['website'] = undefined;
+CompetitorCompany.prototype['website'] = undefined;
 
 /**
- * Type of investor
- * @member {module:model/Investor.TypeEnum} type
+ * Why this company is considered a competitor
+ * @member {module:model/CompetitorCompany.CompetitionReasonEnum} competition_reason
  */
-Investor.prototype['type'] = undefined;
-
-/**
- * Amount invested in USD (if known)
- * @member {Number} amount_usd
- */
-Investor.prototype['amount_usd'] = undefined;
+CompetitorCompany.prototype['competition_reason'] = undefined;
 
 
 
 
 
 /**
- * Allowed values for the <code>type</code> property.
+ * Allowed values for the <code>competition_reason</code> property.
  * @enum {String}
  * @readonly
  */
-Investor['TypeEnum'] = {
+CompetitorCompany['CompetitionReasonEnum'] = {
 
     /**
-     * value: "company"
+     * value: "organic_keyword_overlap"
      * @const
      */
-    "company": "company",
+    "organic_keyword_overlap": "organic_keyword_overlap",
 
     /**
-     * value: "angel"
+     * value: "product_overlap"
      * @const
      */
-    "angel": "angel"
+    "product_overlap": "product_overlap"
 };
 
 
 
-export default Investor;
+export default CompetitorCompany;
 

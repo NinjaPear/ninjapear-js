@@ -12,22 +12,21 @@
  */
 
 import ApiClient from '../ApiClient';
-import TargetSettings from './TargetSettings';
 
 /**
- * The UpdateTargetRequest model module.
- * @module model/UpdateTargetRequest
+ * The WorkEmailResponse model module.
+ * @module model/WorkEmailResponse
  * @version 1.0.0
  */
-class UpdateTargetRequest {
+class WorkEmailResponse {
     /**
-     * Constructs a new <code>UpdateTargetRequest</code>.
-     * @alias module:model/UpdateTargetRequest
-     * @param settings {module:model/TargetSettings} 
+     * Constructs a new <code>WorkEmailResponse</code>.
+     * @alias module:model/WorkEmailResponse
+     * @param workEmail {String} Best-effort work email address. `null` if no public email was found and no email pattern could be inferred from the domain.
      */
-    constructor(settings) { 
+    constructor(workEmail) { 
         
-        UpdateTargetRequest.initialize(this, settings);
+        WorkEmailResponse.initialize(this, workEmail);
     }
 
     /**
@@ -35,43 +34,43 @@ class UpdateTargetRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, settings) { 
-        obj['settings'] = settings;
+    static initialize(obj, workEmail) { 
+        obj['work_email'] = workEmail;
     }
 
     /**
-     * Constructs a <code>UpdateTargetRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>WorkEmailResponse</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/UpdateTargetRequest} obj Optional instance to populate.
-     * @return {module:model/UpdateTargetRequest} The populated <code>UpdateTargetRequest</code> instance.
+     * @param {module:model/WorkEmailResponse} obj Optional instance to populate.
+     * @return {module:model/WorkEmailResponse} The populated <code>WorkEmailResponse</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new UpdateTargetRequest();
+            obj = obj || new WorkEmailResponse();
 
-            if (data.hasOwnProperty('settings')) {
-                obj['settings'] = TargetSettings.constructFromObject(data['settings']);
+            if (data.hasOwnProperty('work_email')) {
+                obj['work_email'] = ApiClient.convertToType(data['work_email'], 'String');
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>UpdateTargetRequest</code>.
+     * Validates the JSON data with respect to <code>WorkEmailResponse</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UpdateTargetRequest</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>WorkEmailResponse</code>.
      */
     static validateJSON(data) {
         // check to make sure all required properties are present in the JSON string
-        for (const property of UpdateTargetRequest.RequiredProperties) {
+        for (const property of WorkEmailResponse.RequiredProperties) {
             if (!data.hasOwnProperty(property)) {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `settings`
-        if (data['settings']) { // data not null
-          TargetSettings.validateJSON(data['settings']);
+        // ensure the json data is a string
+        if (data['work_email'] && !(typeof data['work_email'] === 'string' || data['work_email'] instanceof String)) {
+            throw new Error("Expected the field `work_email` to be a primitive type in the JSON string but got " + data['work_email']);
         }
 
         return true;
@@ -80,17 +79,18 @@ class UpdateTargetRequest {
 
 }
 
-UpdateTargetRequest.RequiredProperties = ["settings"];
+WorkEmailResponse.RequiredProperties = ["work_email"];
 
 /**
- * @member {module:model/TargetSettings} settings
+ * Best-effort work email address. `null` if no public email was found and no email pattern could be inferred from the domain.
+ * @member {String} work_email
  */
-UpdateTargetRequest.prototype['settings'] = undefined;
+WorkEmailResponse.prototype['work_email'] = undefined;
 
 
 
 
 
 
-export default UpdateTargetRequest;
+export default WorkEmailResponse;
 

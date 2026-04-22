@@ -12,20 +12,21 @@
  */
 
 import ApiClient from '../ApiClient';
+import CompetitorCompany from './CompetitorCompany';
 
 /**
- * The CreditBalanceResponse model module.
- * @module model/CreditBalanceResponse
+ * The CompetitorListingResponse model module.
+ * @module model/CompetitorListingResponse
  * @version 1.0.0
  */
-class CreditBalanceResponse {
+class CompetitorListingResponse {
     /**
-     * Constructs a new <code>CreditBalanceResponse</code>.
-     * @alias module:model/CreditBalanceResponse
+     * Constructs a new <code>CompetitorListingResponse</code>.
+     * @alias module:model/CompetitorListingResponse
      */
     constructor() { 
         
-        CreditBalanceResponse.initialize(this);
+        CompetitorListingResponse.initialize(this);
     }
 
     /**
@@ -37,29 +38,39 @@ class CreditBalanceResponse {
     }
 
     /**
-     * Constructs a <code>CreditBalanceResponse</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>CompetitorListingResponse</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CreditBalanceResponse} obj Optional instance to populate.
-     * @return {module:model/CreditBalanceResponse} The populated <code>CreditBalanceResponse</code> instance.
+     * @param {module:model/CompetitorListingResponse} obj Optional instance to populate.
+     * @return {module:model/CompetitorListingResponse} The populated <code>CompetitorListingResponse</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new CreditBalanceResponse();
+            obj = obj || new CompetitorListingResponse();
 
-            if (data.hasOwnProperty('credit_balance')) {
-                obj['credit_balance'] = ApiClient.convertToType(data['credit_balance'], 'Number');
+            if (data.hasOwnProperty('competitors')) {
+                obj['competitors'] = ApiClient.convertToType(data['competitors'], [CompetitorCompany]);
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>CreditBalanceResponse</code>.
+     * Validates the JSON data with respect to <code>CompetitorListingResponse</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CreditBalanceResponse</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CompetitorListingResponse</code>.
      */
     static validateJSON(data) {
+        if (data['competitors']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['competitors'])) {
+                throw new Error("Expected the field `competitors` to be an array in the JSON data but got " + data['competitors']);
+            }
+            // validate the optional field `competitors` (array)
+            for (const item of data['competitors']) {
+                CompetitorCompany.validateJSON(item);
+            };
+        }
 
         return true;
     }
@@ -70,15 +81,15 @@ class CreditBalanceResponse {
 
 
 /**
- * Your current credit balance
- * @member {Number} credit_balance
+ * List of competitors for the target company
+ * @member {Array.<module:model/CompetitorCompany>} competitors
  */
-CreditBalanceResponse.prototype['credit_balance'] = undefined;
+CompetitorListingResponse.prototype['competitors'] = undefined;
 
 
 
 
 
 
-export default CreditBalanceResponse;
+export default CompetitorListingResponse;
 

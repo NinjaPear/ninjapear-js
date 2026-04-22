@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles. 9. Discover competitors of any company (by keyword overlap and product overlap).
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -19,6 +19,8 @@ import CompanyDetailsResponse from './model/CompanyDetailsResponse';
 import CompanyFundingResponse from './model/CompanyFundingResponse';
 import CompanyUpdate from './model/CompanyUpdate';
 import CompanyUpdatesResponse from './model/CompanyUpdatesResponse';
+import CompetitorCompany from './model/CompetitorCompany';
+import CompetitorListingResponse from './model/CompetitorListingResponse';
 import CreateFeedRequest from './model/CreateFeedRequest';
 import CreateFeedRequestTargetsInner from './model/CreateFeedRequestTargetsInner';
 import CreditBalanceResponse from './model/CreditBalanceResponse';
@@ -41,8 +43,10 @@ import Target from './model/Target';
 import TargetSettings from './model/TargetSettings';
 import UpdateFeedRequest from './model/UpdateFeedRequest';
 import UpdateTargetRequest from './model/UpdateTargetRequest';
+import WorkEmailResponse from './model/WorkEmailResponse';
 import WorkExperience from './model/WorkExperience';
 import CompanyAPIApi from './api/CompanyAPIApi';
+import CompetitorAPIApi from './api/CompetitorAPIApi';
 import ContactAPIApi from './api/ContactAPIApi';
 import CustomerAPIApi from './api/CustomerAPIApi';
 import EmployeeAPIApi from './api/EmployeeAPIApi';
@@ -79,7 +83,7 @@ import MonitorAPIApi from './api/MonitorAPIApi';
 * </pre>
 * </p>
 * @module index
-* @version 1.3.0
+* @version 1.0.0
 */
 export {
     /**
@@ -123,6 +127,18 @@ export {
      * @property {module:model/CompanyUpdatesResponse}
      */
     CompanyUpdatesResponse,
+
+    /**
+     * The CompetitorCompany model constructor.
+     * @property {module:model/CompetitorCompany}
+     */
+    CompetitorCompany,
+
+    /**
+     * The CompetitorListingResponse model constructor.
+     * @property {module:model/CompetitorListingResponse}
+     */
+    CompetitorListingResponse,
 
     /**
      * The CreateFeedRequest model constructor.
@@ -257,6 +273,12 @@ export {
     UpdateTargetRequest,
 
     /**
+     * The WorkEmailResponse model constructor.
+     * @property {module:model/WorkEmailResponse}
+     */
+    WorkEmailResponse,
+
+    /**
      * The WorkExperience model constructor.
      * @property {module:model/WorkExperience}
      */
@@ -267,6 +289,12 @@ export {
     * @property {module:api/CompanyAPIApi}
     */
     CompanyAPIApi,
+
+    /**
+    * The CompetitorAPIApi service constructor.
+    * @property {module:api/CompetitorAPIApi}
+    */
+    CompetitorAPIApi,
 
     /**
     * The ContactAPIApi service constructor.

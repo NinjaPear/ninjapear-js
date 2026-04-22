@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles. 9. Discover competitors of any company (by keyword overlap and product overlap).
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -15,11 +15,12 @@
 import ApiClient from "../ApiClient";
 import Error from '../model/Error';
 import PersonProfileResponse from '../model/PersonProfileResponse';
+import WorkEmailResponse from '../model/WorkEmailResponse';
 
 /**
 * EmployeeAPI service.
 * @module api/EmployeeAPIApi
-* @version 1.3.0
+* @version 1.0.0
 */
 export default class EmployeeAPIApi {
 
@@ -51,7 +52,7 @@ export default class EmployeeAPIApi {
      * @param {String} [firstName] Person's first name
      * @param {String} [middleName] Person's middle name
      * @param {String} [lastName] Person's last name
-     * @param {String} [employerWebsite] Employer's website URL
+     * @param {String} [employerWebsite] Employer's website URL or company name. A website URL (e.g. `https://stripe.com`) is strongly recommended for precision.
      * @param {String} [role] Job role/title
      * @param {String} [slug] Person's unique slug identifier (direct lookup)
      * @param {String} [id] Person's unique ID (direct lookup)
@@ -85,6 +86,61 @@ export default class EmployeeAPIApi {
       let returnType = PersonProfileResponse;
       return this.apiClient.callApi(
         '/api/v1/employee/profile', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getWorkEmail operation.
+     * @callback module:api/EmployeeAPIApi~getWorkEmailCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/WorkEmailResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Work Email Lookup
+     * Makes a best-effort attempt to return a person's public work email address given their first name (optional last name) and a company domain. Searches public sources for the specific email first; if none is found, infers the address from observed employee email patterns at the domain. Returns `work_email: null` if no evidence is available.  **Cost:** 2 credits per API call, charged regardless of whether an email is returned.
+     * @param {String} firstName Person's first name
+     * @param {String} domain Company domain. Scheme, www, and trailing slash are stripped if present.
+     * @param {Object} opts Optional parameters
+     * @param {String} [lastName] Person's last name. Improves accuracy when the email pattern needs it.
+     * @param {Boolean} [forceRefresh] If `true`, bypass the cache and re-run the AI lookup.
+     * @param {module:api/EmployeeAPIApi~getWorkEmailCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/WorkEmailResponse}
+     */
+    getWorkEmail(firstName, domain, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'firstName' is set
+      if (firstName === undefined || firstName === null) {
+        throw new Error("Missing the required parameter 'firstName' when calling getWorkEmail");
+      }
+      // verify the required parameter 'domain' is set
+      if (domain === undefined || domain === null) {
+        throw new Error("Missing the required parameter 'domain' when calling getWorkEmail");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'first_name': firstName,
+        'last_name': opts['lastName'],
+        'domain': domain,
+        '_force_refresh': opts['forceRefresh']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = WorkEmailResponse;
+      return this.apiClient.callApi(
+        '/api/v1/employee/work-email', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

@@ -1,6 +1,6 @@
 /**
  * NinjaPear API
- * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles.
+ * NinjaPear is a data platform that seeks to serve as the single source of truth for B2B data, be it to power your data-driven applications or your sales-driven workflow.  As a data client of NinjaPear API, you can: 1. Look up the customers, investors, and partners/platforms of any business globally. 2. (FREE) Retrieve the logo of any company. 3. (FREE) Find out the nature of an email address. 4. (FREE) Check your credit balance. 5. Monitor companies for updates (blog posts, X/Twitter posts, website changes) via RSS feeds. 6. Look up detailed company information (description, industry, executives, financials). 7. Get company funding history and investors. 8. Enrich person/employee professional profiles. 9. Discover competitors of any company (by keyword overlap and product overlap).
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: hello@nubela.co
@@ -22,7 +22,7 @@ import Error from '../model/Error';
 /**
 * CompanyAPI service.
 * @module api/CompanyAPIApi
-* @version 1.3.0
+* @version 1.0.0
 */
 export default class CompanyAPIApi {
 
@@ -49,7 +49,7 @@ export default class CompanyAPIApi {
     /**
      * Company Details
      * Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count=true, +1 credit if follower_count=include)
-     * @param {String} website The website URL of the target company
+     * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
      * @param {Object} opts Optional parameters
      * @param {Boolean} [includeEmployeeCount = false)] Fetch fresh employee count data via web search. Adds 2 credits.
      * @param {module:model/String} [followerCount] Set to 'include' to fetch Twitter/X follower and following counts. Adds 1 credit.
@@ -97,8 +97,8 @@ export default class CompanyAPIApi {
 
     /**
      * Company Funding
-     * Retrieve the funding history of a company including all funding rounds and investors.  **Cost:** 2 credits + 1 credit per unique investor returned
-     * @param {String} website The website URL of the target company
+     * Retrieve the funding history of a company including all funding rounds and investors.  On cache miss this endpoint streams a single JSON object with whitespace heartbeats while Google AI Mode and LLM extraction run; set your HTTP client read timeout to at least 180 seconds. Cache hits return immediately. Fresh-path failures are delivered as HTTP 200 with `error` and `error_code` fields in the response body (see `CompanyFundingResponse`) because streaming responses cannot set late status codes.  **Cost:** 2 credits + 1 credit per unique investor returned
+     * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
      * @param {module:api/CompanyAPIApi~getCompanyFundingCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CompanyFundingResponse}
      */
@@ -184,7 +184,7 @@ export default class CompanyAPIApi {
     /**
      * Company Updates
      * Retrieve recent blog posts and X/Twitter updates for a company.  **Cost:** 2 credits
-     * @param {String} website The website URL of the target company
+     * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
      * @param {module:api/CompanyAPIApi~getCompanyUpdatesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CompanyUpdatesResponse}
      */
@@ -227,7 +227,7 @@ export default class CompanyAPIApi {
     /**
      * Employee Count
      * Get the employee count for a company. Uses web search to find the most recent employee count information.  **Cost:** 2 credits
-     * @param {String} website The website URL of the target company
+     * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
      * @param {module:api/CompanyAPIApi~getEmployeeCountCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/EmployeeCountResponse}
      */
