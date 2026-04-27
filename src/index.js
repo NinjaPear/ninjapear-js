@@ -19,6 +19,7 @@ import CompanyDetailsResponse from './model/CompanyDetailsResponse';
 import CompanyFundingResponse from './model/CompanyFundingResponse';
 import CompanyUpdate from './model/CompanyUpdate';
 import CompanyUpdatesResponse from './model/CompanyUpdatesResponse';
+import CompanyWebsiteResponse from './model/CompanyWebsiteResponse';
 import CompetitorCompany from './model/CompetitorCompany';
 import CompetitorListingResponse from './model/CompetitorListingResponse';
 import CreateFeedRequest from './model/CreateFeedRequest';
@@ -127,6 +128,12 @@ export {
      * @property {module:model/CompanyUpdatesResponse}
      */
     CompanyUpdatesResponse,
+
+    /**
+     * The CompanyWebsiteResponse model constructor.
+     * @property {module:model/CompanyWebsiteResponse}
+     */
+    CompanyWebsiteResponse,
 
     /**
      * The CompetitorCompany model constructor.

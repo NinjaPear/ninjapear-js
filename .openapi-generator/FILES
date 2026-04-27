@@ -9,6 +9,7 @@ docs/CompanyDetailsResponse.md
 docs/CompanyFundingResponse.md
 docs/CompanyUpdate.md
 docs/CompanyUpdatesResponse.md
+docs/CompanyWebsiteResponse.md
 docs/CompetitorAPIApi.md
 docs/CompetitorCompany.md
 docs/CompetitorListingResponse.md
@@ -59,6 +60,7 @@ src/model/CompanyDetailsResponse.js
 src/model/CompanyFundingResponse.js
 src/model/CompanyUpdate.js
 src/model/CompanyUpdatesResponse.js
+src/model/CompanyWebsiteResponse.js
 src/model/CompetitorCompany.js
 src/model/CompetitorListingResponse.js
 src/model/CreateFeedRequest.js
@@ -85,4 +87,4 @@ src/model/UpdateFeedRequest.js
 src/model/UpdateTargetRequest.js
 src/model/WorkEmailResponse.js
 src/model/WorkExperience.js
-test/model/WorkEmailResponse.spec.js
+test/model/CompanyWebsiteResponse.spec.js

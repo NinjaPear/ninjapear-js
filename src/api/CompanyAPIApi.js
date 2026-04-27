@@ -16,6 +16,7 @@ import ApiClient from "../ApiClient";
 import CompanyDetailsResponse from '../model/CompanyDetailsResponse';
 import CompanyFundingResponse from '../model/CompanyFundingResponse';
 import CompanyUpdatesResponse from '../model/CompanyUpdatesResponse';
+import CompanyWebsiteResponse from '../model/CompanyWebsiteResponse';
 import EmployeeCountResponse from '../model/EmployeeCountResponse';
 import Error from '../model/Error';
 
@@ -48,7 +49,7 @@ export default class CompanyAPIApi {
 
     /**
      * Company Details
-     * Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count=true, +1 credit if follower_count=include)
+     * Retrieve detailed company information including description, industry, current leadership team (executives), addresses, and for public companies: financials and stock info. Each executive entry carries a pre-filled `person_profile_url` you can follow to fetch their full Person Profile.  **Cost:** 3 credits (5 credits if include_employee_count=true, +1 credit if follower_count=include)
      * @param {String} website The website URL or company name of the target company. A website URL (e.g. `https://www.stripe.com`) is strongly recommended for precision.
      * @param {Object} opts Optional parameters
      * @param {Boolean} [includeEmployeeCount = false)] Fetch fresh employee count data via web search. Adds 2 credits.
@@ -211,6 +212,55 @@ export default class CompanyAPIApi {
       let returnType = CompanyUpdatesResponse;
       return this.apiClient.callApi(
         '/api/v1/company/updates', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getCompanyWebsite operation.
+     * @callback module:api/CompanyAPIApi~getCompanyWebsiteCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CompanyWebsiteResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Website Lookup
+     * Resolve a company's name to its canonical website URL.  **Cost:** 1 credit per request, charged whether or not a match is found.
+     * @param {String} companyName The name of the company to look up.
+     * @param {Object} opts Optional parameters
+     * @param {String} [countryCode] Optional ISO 3166-1 alpha-2 2-letter country code used to bias the search geographically (e.g. `us`, `gb`, `de`, `sg`).
+     * @param {String} [hint] Provide a hint to differentiate similarly named companies in the same country.
+     * @param {module:api/CompanyAPIApi~getCompanyWebsiteCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CompanyWebsiteResponse}
+     */
+    getCompanyWebsite(companyName, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'companyName' is set
+      if (companyName === undefined || companyName === null) {
+        throw new Error("Missing the required parameter 'companyName' when calling getCompanyWebsite");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'company_name': companyName,
+        'country_code': opts['countryCode'],
+        'hint': opts['hint']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CompanyWebsiteResponse;
+      return this.apiClient.callApi(
+        '/api/v1/company/website', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

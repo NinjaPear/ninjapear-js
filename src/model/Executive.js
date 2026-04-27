@@ -56,6 +56,9 @@ class Executive {
             if (data.hasOwnProperty('role')) {
                 obj['role'] = ApiClient.convertToType(data['role'], 'String');
             }
+            if (data.hasOwnProperty('person_profile_url')) {
+                obj['person_profile_url'] = ApiClient.convertToType(data['person_profile_url'], 'String');
+            }
         }
         return obj;
     }
@@ -77,6 +80,10 @@ class Executive {
         // ensure the json data is a string
         if (data['role'] && !(typeof data['role'] === 'string' || data['role'] instanceof String)) {
             throw new Error("Expected the field `role` to be a primitive type in the JSON string but got " + data['role']);
+        }
+        // ensure the json data is a string
+        if (data['person_profile_url'] && !(typeof data['person_profile_url'] === 'string' || data['person_profile_url'] instanceof String)) {
+            throw new Error("Expected the field `person_profile_url` to be a primitive type in the JSON string but got " + data['person_profile_url']);
         }
 
         return true;
@@ -104,6 +111,12 @@ Executive.prototype['title'] = undefined;
  * @member {module:model/Executive.RoleEnum} role
  */
 Executive.prototype['role'] = undefined;
+
+/**
+ * Pre-filled URL to the Person Profile endpoint. Authenticate with your bearer token to fetch the executive's full profile. Null when first name or company website is missing.
+ * @member {String} person_profile_url
+ */
+Executive.prototype['person_profile_url'] = undefined;
 
 
 

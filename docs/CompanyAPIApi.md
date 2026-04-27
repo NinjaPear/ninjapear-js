@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getCompanyFunding**](CompanyAPIApi.md#getCompanyFunding) | **GET** /api/v1/company/funding | Company Funding
 [**getCompanyLogo**](CompanyAPIApi.md#getCompanyLogo) | **GET** /api/v1/company/logo | Company Logo
 [**getCompanyUpdates**](CompanyAPIApi.md#getCompanyUpdates) | **GET** /api/v1/company/updates | Company Updates
+[**getCompanyWebsite**](CompanyAPIApi.md#getCompanyWebsite) | **GET** /api/v1/company/website | Website Lookup
 [**getEmployeeCount**](CompanyAPIApi.md#getEmployeeCount) | **GET** /api/v1/company/employee-count | Employee Count
 
 
@@ -18,7 +19,7 @@ Method | HTTP request | Description
 
 Company Details
 
-Retrieve detailed company information including description, industry, executives, addresses, and for public companies: financials and stock info.  **Cost:** 2 credits (4 credits if include_employee_count&#x3D;true, +1 credit if follower_count&#x3D;include)
+Retrieve detailed company information including description, industry, current leadership team (executives), addresses, and for public companies: financials and stock info. Each executive entry carries a pre-filled &#x60;person_profile_url&#x60; you can follow to fetch their full Person Profile.  **Cost:** 3 credits (5 credits if include_employee_count&#x3D;true, +1 credit if follower_count&#x3D;include)
 
 ### Example
 
@@ -203,6 +204,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CompanyUpdatesResponse**](CompanyUpdatesResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## getCompanyWebsite
+
+> CompanyWebsiteResponse getCompanyWebsite(companyName, opts)
+
+Website Lookup
+
+Resolve a company&#39;s name to its canonical website URL.  **Cost:** 1 credit per request, charged whether or not a match is found.
+
+### Example
+
+```javascript
+import Ninjapear from 'ninjapear';
+let defaultClient = Ninjapear.ApiClient.instance;
+// Configure Bearer access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Ninjapear.CompanyAPIApi();
+let companyName = "Stripe"; // String | The name of the company to look up.
+let opts = {
+  'countryCode': "us", // String | Optional ISO 3166-1 alpha-2 2-letter country code used to bias the search geographically (e.g. `us`, `gb`, `de`, `sg`).
+  'hint': "fintech payments platform" // String | Provide a hint to differentiate similarly named companies in the same country.
+};
+apiInstance.getCompanyWebsite(companyName, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **companyName** | **String**| The name of the company to look up. | 
+ **countryCode** | **String**| Optional ISO 3166-1 alpha-2 2-letter country code used to bias the search geographically (e.g. &#x60;us&#x60;, &#x60;gb&#x60;, &#x60;de&#x60;, &#x60;sg&#x60;). | [optional] 
+ **hint** | **String**| Provide a hint to differentiate similarly named companies in the same country. | [optional] 
+
+### Return type
+
+[**CompanyWebsiteResponse**](CompanyWebsiteResponse.md)
 
 ### Authorization
 

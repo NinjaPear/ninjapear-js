@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **name** | **String** | Full name of the executive | [optional] 
 **title** | **String** | Job title | [optional] 
 **role** | **String** | Normalized role type | [optional] 
+**personProfileUrl** | **String** | Pre-filled URL to the Person Profile endpoint. Authenticate with your bearer token to fetch the executive&#39;s full profile. Null when first name or company website is missing. | [optional] 
 
 
 

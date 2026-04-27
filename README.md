@@ -144,6 +144,7 @@ Class | Method | HTTP request | Description
 *Ninjapear.CompanyAPIApi* | [**getCompanyFunding**](docs/CompanyAPIApi.md#getCompanyFunding) | **GET** /api/v1/company/funding | Company Funding
 *Ninjapear.CompanyAPIApi* | [**getCompanyLogo**](docs/CompanyAPIApi.md#getCompanyLogo) | **GET** /api/v1/company/logo | Company Logo
 *Ninjapear.CompanyAPIApi* | [**getCompanyUpdates**](docs/CompanyAPIApi.md#getCompanyUpdates) | **GET** /api/v1/company/updates | Company Updates
+*Ninjapear.CompanyAPIApi* | [**getCompanyWebsite**](docs/CompanyAPIApi.md#getCompanyWebsite) | **GET** /api/v1/company/website | Website Lookup
 *Ninjapear.CompanyAPIApi* | [**getEmployeeCount**](docs/CompanyAPIApi.md#getEmployeeCount) | **GET** /api/v1/company/employee-count | Employee Count
 *Ninjapear.CompetitorAPIApi* | [**getCompetitorListing**](docs/CompetitorAPIApi.md#getCompetitorListing) | **GET** /api/v1/competitor/listing | Competitor Listing
 *Ninjapear.ContactAPIApi* | [**checkDisposableEmail**](docs/ContactAPIApi.md#checkDisposableEmail) | **GET** /api/v1/contact/disposable-email | Disposable Email Checker
@@ -170,6 +171,7 @@ Class | Method | HTTP request | Description
  - [Ninjapear.CompanyFundingResponse](docs/CompanyFundingResponse.md)
  - [Ninjapear.CompanyUpdate](docs/CompanyUpdate.md)
  - [Ninjapear.CompanyUpdatesResponse](docs/CompanyUpdatesResponse.md)
+ - [Ninjapear.CompanyWebsiteResponse](docs/CompanyWebsiteResponse.md)
  - [Ninjapear.CompetitorCompany](docs/CompetitorCompany.md)
  - [Ninjapear.CompetitorListingResponse](docs/CompetitorListingResponse.md)
  - [Ninjapear.CreateFeedRequest](docs/CreateFeedRequest.md)
